@@ -1,3 +1,4 @@
+- NOTE: This is the CC fork of cl-plus-ssl/cl-plus-ssl.
 [![Build Status](https://github.com/cl-plus-ssl/cl-plus-ssl/actions/workflows/test.yml/badge.svg)](https://github.com/cl-plus-ssl/cl-plus-ssl/actions)
 
 # CL+SSL

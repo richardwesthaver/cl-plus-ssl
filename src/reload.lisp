@@ -1,10 +1,10 @@
-;;;; -*- Mode: LISP; Syntax: COMMON-LISP; indent-tabs-mode: nil; coding: utf-8; show-trailing-whitespace: t -*-
-;;;
+;;; reload.lisp
+
 ;;; Copyright (C) 2001, 2003  Eric Marsden
 ;;; Copyright (C) 2005  David Lichteblau
 ;;; "the conditions and ENSURE-SSL-FUNCALL are by Jochen Schmidt."
 ;;; Copyright (C) contributors as per cl+ssl git history
-;;;
+
 ;;; See LICENSE for details.
 
 ;;; We do this in an extra file so that it happens
@@ -12,7 +12,6 @@
 ;;;     time on some implemenations
 ;;;   - but not every time ffi.lisp is re-loaded as would happen if we
 ;;;     put this directly into ffi.lisp
-
 (in-package :cl+ssl)
 
 ;; The default OS-X libssl seems have had insufficient crypto algos

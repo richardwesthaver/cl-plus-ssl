@@ -1,9 +1,6 @@
 ;;; Copyright (C) 2011  David Lichteblau
-;;;
+
 ;;; See LICENSE for details.
-
-#+xcvb (module (:depends-on ("package")))
-
 (in-package :cl+ssl)
 
 ;; from cl+ssl/example.lisp

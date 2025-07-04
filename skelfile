@@ -1,0 +1,8 @@
+;;; cl-plus-ssl @ 2025-07-04.18:51:34 -*- mode:skel; -*-
+:name "cl-plus-ssl"
+:author ""
+:version ""
+:vc (:hg "https://vc.compiler.company/ext/cl-plus-ssl"
+     (upstream (:git "https://github.com/cl-plus-ssl/cl-plus-ssl"))
+     (gh (:git "ssh://github.com/richardwesthaver/cl-plus-ssl")))
+:rules ((clean () #$rm -f *.fasl *.x86f *.ufsl *.lib *.pfsl$#))

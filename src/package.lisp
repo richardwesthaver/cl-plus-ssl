@@ -1,12 +1,11 @@
-;;;; -*- Mode: LISP; Syntax: COMMON-LISP; indent-tabs-mode: nil; coding: utf-8; show-trailing-whitespace: t -*-
-;;;
+;;; package.lisp
+
 ;;; Copyright (C) 2001, 2003  Eric Marsden
 ;;; Copyright (C) 2005  David Lichteblau
 ;;; "the conditions and ENSURE-SSL-FUNCALL are by Jochen Schmidt."
 ;;; Copyright (C) contributors as per cl+ssl git history
-;;;
-;;; See LICENSE for details.
 
+;;; See LICENSE for details.
 (defpackage :cl+ssl
   (:use :common-lisp :trivial-gray-streams))
 

@@ -1,12 +1,11 @@
-;;;; -*- Mode: LISP; Syntax: COMMON-LISP; indent-tabs-mode: nil; coding: utf-8; show-trailing-whitespace: t -*-
-;;;
+;;; cl+ssl.asd
+
 ;;; Copyright (C) 2001, 2003  Eric Marsden
 ;;; Copyright (C) 2005  David Lichteblau
 ;;; Copyright (C) 2007  Pixel // pinterface
 ;;; "the conditions and ENSURE-SSL-FUNCALL are by Jochen Schmidt."
-;;;
-;;; See LICENSE for details.
 
+;;; See LICENSE for details.
 (defsystem :cl+ssl
   :description "Common Lisp interface to OpenSSL."
   :license "MIT"
@@ -21,8 +20,8 @@
                :usocket
                :alexandria
                :trivial-features
-               (:feature :sbcl :sb-posix)
-               (:feature (:and :sbcl :win32) :sb-bsd-sockets))
+               :sb-posix
+               (:feature :win32 :sb-bsd-sockets))
   :serial t
   :components ((:module "src"
                 :serial t
@@ -35,8 +34,7 @@
                  (:file "ssl-funcall")
                  (:file "init")
                  (:file "ffi-buffer-all")
-                 (:file "ffi-buffer" :if-feature (:not :clisp))
-                 (:file "ffi-buffer-clisp" :if-feature :clisp)
+                 (:file "ffi-buffer")
                  (:file "streams")
                  (:file "x509")
                  (:file "random")

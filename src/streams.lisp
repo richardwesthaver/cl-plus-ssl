@@ -1,13 +1,12 @@
-;;;; -*- Mode: LISP; Syntax: COMMON-LISP; indent-tabs-mode: nil; coding: utf-8; show-trailing-whitespace: t -*-
-;;;
+;;; streams.lisp
+
 ;;; Copyright (C) 2001, 2003  Eric Marsden
 ;;; Copyright (C) 2005  David Lichteblau
 ;;; Copyright (C) 2007  Pixel // pinterface
 ;;; "the conditions and ENSURE-SSL-FUNCALL are by Jochen Schmidt."
 ;;; Copyright (C) contributors as per cl+ssl git history
-;;;
-;;; See LICENSE for details.
 
+;;; See LICENSE for details.
 (eval-when (:compile-toplevel)
   (declaim
    (optimize (speed 3) (space 1) (safety 1) (debug 0) (compilation-speed 0))))
@@ -205,11 +204,7 @@
                   (logior (sb-posix:fcntl fd sb-posix::f-getfl)
                           sb-posix::o-nonblock)))
 
-#-(or (and clozure-common-lisp (not windows)) sbcl)
-(defun install-nonblock-flag (fd)
-  (declare (ignore fd)))
-
-#+(and sbcl win32)
+#+win32
 (defun install-nonblock-flag (fd)
   (when (boundp 'sockint::fionbio)
     (sockint::ioctl fd sockint::fionbio 1)))

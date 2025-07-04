@@ -1,9 +1,8 @@
-;;;; -*- Mode: LISP; Syntax: COMMON-LISP; indent-tabs-mode: nil; coding: utf-8; show-trailing-whitespace: t -*-
-;;;
-;;; Copyright (C) contributors as per cl+ssl git history
-;;;
-;;; See LICENSE for details.
+;;; init.lisp
 
+;;; Copyright (C) contributors as per cl+ssl git history
+
+;;; See LICENSE for details.
 (eval-when (:compile-toplevel)
   (declaim
    (optimize (speed 3) (space 1) (safety 1) (debug 0) (compilation-speed 0))))
@@ -11,7 +10,6 @@
 (in-package :cl+ssl)
 
 ;;; Global state
-;;;
 (defvar *ssl-global-context* nil)
 (defvar *ssl-global-method* nil)
 
@@ -44,10 +42,8 @@
 
 
 ;;; Encrypted PEM files support
-;;;
 
 ;; based on http://www.openssl.org/docs/ssl/SSL_CTX_set_default_passwd_cb.html
-
 (defvar *pem-password* ""
   "The callback registered with SSL_CTX_set_default_passwd_cb
 will use this value.")
@@ -72,10 +68,7 @@ will use this value.")
   `(let ((*pem-password* (or ,password "")))
      ,@body))
 
-
 ;;; Initialization
-;;;
-
 (defun init-prng (seed-byte-sequence)
   (let* ((length (length seed-byte-sequence))
          (buf (cffi:make-shareable-byte-vector length)))
@@ -90,7 +83,6 @@ will use this value.")
 ;; locking of recursive locks.  with-recursive-lock works, but acquire/release
 ;; don't.  Hence we use non-recursize locks here (but can use a recursive
 ;; lock for the global lock).
-
 (cffi:defcallback locking-callback :void
     ((mode :int)
      (n :int)
@@ -195,10 +187,7 @@ Keyword arguments:
 
         Hint: do not use Common Lisp RANDOM function to generate
         the RAND-SEED, because the function usually returns
-        predictable values.
-"
-  #+lispworks
-  (check-cl+ssl-symbols)
+        predictable values."
   (bordeaux-threads:with-recursive-lock-held (*global-lock*)
     (unless (ssl-initialized-p)
       (initialize :method method :rand-seed rand-seed))))
@@ -229,8 +218,7 @@ memory accross image reloads).
 This should work fine if the location and version of the
 OpenSSL shared libraries have not changed.
 If they have changed, you may get errors, as users report:
-https://github.com/cl-plus-ssl/cl-plus-ssl/issues/167
-"
+https://github.com/cl-plus-ssl/cl-plus-ssl/issues/167"
   (detect-custom-openssl-installations-if-macos)
   (unless (member :cl+ssl-foreign-libs-already-loaded
                   *features*)

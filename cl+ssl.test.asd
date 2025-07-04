@@ -1,9 +1,8 @@
-;;;; -*- Mode: LISP; Syntax: COMMON-LISP; indent-tabs-mode: nil; coding: utf-8; show-trailing-whitespace: t -*-
-;;;
-;;; Copyright (C) 2015 Ilya Khaprov <ilya.khaprov@publitechs.com>
-;;;
-;;; See LICENSE for details.
+;;; cl+ssl.test.asd
 
+;;; Copyright (C) 2015 Ilya Khaprov <ilya.khaprov@publitechs.com>
+
+;;; See LICENSE for details.
 (defsystem :cl+ssl.test
   :version "0.1"
   :description "CL+SSL test suite"
@@ -15,7 +14,7 @@
                :usocket
                :trivial-sockets ; for client-server.lisp
                :bordeaux-threads ; for client-server.lisp
-               (:feature (:or :sbcl :ccl) :cl-coveralls))
+               :cl-coveralls)
   :serial t
   :components ((:module "test"
                 :serial t
