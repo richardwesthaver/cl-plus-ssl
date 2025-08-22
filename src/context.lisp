@@ -144,9 +144,7 @@ Keyword arguments:
     (when (cffi:null-pointer-p ssl-ctx)
       (error 'ssl-error-initialize :reason "Can't create new SSL-CTX"
                                    :queue (read-ssl-error-queue)))
-    (handler-bind ((error (lambda (_)
-                            (declare (ignore _))
-                            (ssl-ctx-free ssl-ctx))))
+    (abort-protect ((ssl-ctx-free ssl-ctx))
       (ssl-ctx-set-options ssl-ctx
                            (apply #'logior
                                   (append disabled-protocols options)))
@@ -184,6 +182,14 @@ Keyword arguments:
       ssl-ctx)))
 
 (defun call-with-global-context (ssl-ctx auto-free-p body-fn)
+  ;; Ensure initialized, otherwise cl+ssl functions called
+  ;; by the BODY-FN may start initialization which
+  ;; will override the global context we bind to SSL-CTX.
+  ;; (This may happen when the SSL-CTX is created _not_
+  ;; by MAKE-CONTEXT, which ensures initialization by itself)
+  ;; https://github.com/cl-plus-ssl/cl-plus-ssl/issues/191
+  (ensure-initialized)
+
   (let* ((*ssl-global-context* ssl-ctx))
     (unwind-protect (funcall body-fn)
       (when auto-free-p
